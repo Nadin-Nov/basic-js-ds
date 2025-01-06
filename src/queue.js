@@ -23,14 +23,30 @@ class Queue {
     return this.start;
   }
 
-  enqueue(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  enqueue(value) {
+    const newElement = new ListNode(value);
+
+    if (this.size === 0) {
+      this.start = newElement;
+      this.end = newElement;
+    } else {
+      this.end.next = newElement;
+      this.end = newElement;
+    }
+    this.size += 1;
   }
 
   dequeue() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if (this.size === 0) {
+      throw new Error('Queue is empty');
+    }
+    const removedValue = this.start.value;
+    this.start = this.start.next;
+    if (this.start === null) {
+      this.end = null;
+    }
+    this.size -= 1;
+    return removedValue;
   }
 }
 
